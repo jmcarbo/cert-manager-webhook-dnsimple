@@ -21,8 +21,8 @@ clusterIssuer:
   production:
     create: false
 image:
-  repository: neoskop/cert-manager-webhook-dnsimple
-  tag: 0.0.5
+  repository: jmcarbo/cert-manager-webhook-dnsimple
+  tag: v0.0.5
   pullPolicy: IfNotPresent
 nameOverride: ""
 fullnameOverride: ""

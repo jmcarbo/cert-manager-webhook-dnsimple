@@ -16,3 +16,5 @@ cert-manager-webhook-dnsimple
 
 # Ignore test binaries
 __main__/
+
+helmfiles/*
