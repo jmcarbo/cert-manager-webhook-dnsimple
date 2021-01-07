@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: joanmarccat2
+  namespace: test
+spec:
+  dnsNames:
+  - "joanmarc.cat"
+  - "*.joanmarc.cat"
+  issuerRef:
+    name: cert-manager-webhook-dnsimple-production
+    kind: ClusterIssuer
+  secretName: joanmarccat2

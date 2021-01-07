@@ -1,0 +1,39 @@
+repositories:
+  - name: webhook
+    url: git+https://github.com/jmcarbo/cert-manager-webhook-dnsimple@deploy/dnsimple?ref=master
+
+environments:
+  default:
+    values:
+      - dnsimple:
+          account: "numeric"
+          token: "account token"
+          email: "email@gmail.com"
+          repository: jmcarbo/cert-manager-webhook-dnsimple
+          tag: "v0.0.51"
+
+helmfiles:
+  - path: ./helmfile-cert-manager.yaml
+
+releases:
+  - name: cert-manager-webhook-dnsimple
+    namespace: cert-manager
+    createNamespace: true                  
+    chart: webhook/cert-manager-webhook-dnsimple
+    #needs:
+    #- cert-manager/cert-manager
+    values:
+      - dnsimple:
+          account: {{ .Values.dnsimple.account }}
+          token: {{ .Values.dnsimple.token }}
+        clusterIssuer:
+          production:
+            enabled: true 
+          staging:
+            enabled: true
+          email:
+            {{ .Values.dnsimple.email }}
+        image:
+          repository: jmcarbo/cert-manager-webhook-dnsimple
+          tag: {{ .Values.dnsimple.tag }}
+
