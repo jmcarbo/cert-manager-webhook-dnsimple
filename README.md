@@ -10,14 +10,13 @@ A [cert-manager][2] ACME DNS01 solver webhook for [DNSimple][1].
 
 ## Quickstart
 
-Take note of your DNSimple API token and account ID from the account settings in the automation tab. Run the following commands replacing the account ID, API token placeholders and email address:
+Take note of your DNSimple API token from the account settings in the automation tab. Run the following commands replacing the API token placeholders and email address:
 
 ```bash
 $ helm repo add neoskop https://charts.neoskop.dev
 $ helm install cert-manager-webhook-dnsimple \
     --namespace cert-manager \
     --dry-run \
-    --set dnsimple.account='<DNSIMPLE_ACCOUNT_ID>' \
     --set dnsimple.token='<DNSIMPLE_API_TOKEN>' \
     --set clusterIssuer.production.enabled=true \
     --set clusterIssuer.staging.enabled=true \
@@ -52,7 +51,6 @@ The Helm chart accepts the following values:
 
 | name                               | required | description                                     | default value                           |
 | ---------------------------------- | -------- | ----------------------------------------------- | --------------------------------------- |
-| `dnsimple.account`                 | ✔️       | DNSimple Account ID                             | _empty_                                 |
 | `dnsimple.token`                   | ✔️       | DNSimple API Token                              | _empty_                                 |
 | `clusterIssuer.email`              |          | LetsEncrypt Admin Email                         | `name@example.com`                      |
 | `clusterIssuer.production.enabled` |          | Create a production `ClusterIssuer`             | `false`                                 |
@@ -79,7 +77,8 @@ Then set-up `testdata/dnsimple/config.json` and `testdata/dnsimple/dnsimple-toke
 Execute the test suite replacing `TEST_ZONE_NAME` with a DNS name you have control over with your DNSimple account:
 
 ```bash
-$ TEST_ZONE_NAME=example.com go test .
+# Mind the trailing dot in the TEST_ZONE_NAME value
+$ TEST_ZONE_NAME=example.com. go test .
 ```
 
 ## Release

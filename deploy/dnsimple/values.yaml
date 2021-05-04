@@ -12,8 +12,9 @@ certManager:
   serviceAccountName: cert-manager
 # logLevel: 3
 dnsimple:
-  account: ""
   token: ""
+  # existingTokenSecret: false
+  # tokenSecretName:
 clusterIssuer:
   email: name@example.com
   staging:
@@ -22,8 +23,9 @@ clusterIssuer:
     create: false
 image:
   repository: jmcarbo/cert-manager-webhook-dnsimple
-  tag: v0.0.5
+  tag: v0.1.5
   pullPolicy: IfNotPresent
+  # pullSecret: "gcr"
 nameOverride: ""
 fullnameOverride: ""
 service:
